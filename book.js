@@ -19,6 +19,22 @@
   const groupBuying = document.getElementById('group-buying');
   const photosInput = document.getElementById('photos');
   const photoPreview = document.getElementById('photo-preview');
+  const calendarPanel = document.querySelector('.calendar-panel');
+  const slotsPanel = document.querySelector('.slots-panel');
+
+  function scrollToEl(el) {
+    if (!el) return;
+    requestAnimationFrame(() => {
+      const target = Math.max(0, el.getBoundingClientRect().top + window.scrollY - 88);
+      const before = window.scrollY;
+      window.scrollTo({ top: target, behavior: 'smooth' });
+      setTimeout(() => {
+        if (window.scrollY === before && Math.abs(target - before) > 4) {
+          window.scrollTo(0, target);
+        }
+      }, 420);
+    });
+  }
 
   const cards = Array.from(document.querySelectorAll('.type-card'));
   const typeInfo = {};
@@ -158,6 +174,7 @@
 
       if (!slots.length) {
         slotsEl.innerHTML = '<p class="empty">That day just filled up. Please choose another.</p>';
+        scrollToEl(slotsPanel);
         return;
       }
 
@@ -169,6 +186,7 @@
         b.addEventListener('click', () => selectSlot(slot, b));
         slotsEl.appendChild(b);
       });
+      scrollToEl(slotsPanel);
     } catch (err) {
       slotsEl.innerHTML = '<p class="empty">Could not load times. Please try again.</p>';
       console.error(err);
@@ -185,7 +203,7 @@
     const label = typeInfo[state.type] ? typeInfo[state.type].label : 'Appointment';
     summary.textContent = `${label} · ${longDate(state.date)} · ${slot.label} – ${slot.endLabel}`;
     details.hidden = false;
-    details.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    scrollToEl(details);
   }
 
   function renderPhotoPreview() {
@@ -225,6 +243,8 @@
       slotsTitle.textContent = 'Choose a day';
       slotsEl.innerHTML = '';
       loadMonth(state.month);
+      scrollToEl(calendarPanel);
+      setTimeout(() => scrollToEl(calendarPanel), 280);
     });
   });
 

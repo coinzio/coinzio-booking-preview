@@ -106,6 +106,7 @@
         '<p class="ref">Reference <strong>CZ-PREVIEW</strong></p>' +
         '<p class="when-detail">' + escape(summary) + '</p>' +
         '<p>A confirmation goes to ' + escape(email) + ' once the time is checked against the calendar.</p>' +
+        '<p class="late-note"><strong>Running late?</strong> Call <a href="tel:+14352003312">(435) 200-3312</a>. If you arrive more than 20 minutes after your appointment time, the appointment will be cancelled and the slot released so the rest of the day stays on schedule.</p>' +
         '</div>' +
         '<p class="fineprint">This is a preview of the booking flow. Nothing was sent, no time was held, and no email will arrive.</p>' +
         '<p class="actions"><a class="btn ghost" href="./">Back to the booking page</a></p>' +
